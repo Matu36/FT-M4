@@ -160,7 +160,11 @@ Empezemos...
 
 Buscá todas las películas filmadas en el año que naciste.
 
+SELECT * FROM movies WHERE year=1985;
+
 2. __1982__
+
+SELECT COUNT (*) FROM movies WHERE year=1982;
 
 Cuantas películas hay en la DB que sean del año 1982?
 
@@ -168,23 +172,46 @@ Cuantas películas hay en la DB que sean del año 1982?
 
 Buscá actores que tengan el substring `stack` en su apellido.
 
+SELECT * FROM actors WHERE last_name LIKE '%stack%';
+
 4. __Fame Name Game__
 
 Buscá los 10 nombres y apellidos más populares entre los actores. Cuantos actores tienen cada uno de esos nombres y apellidos?
 
 > Esta consulta puede involucrar múltiples queries.
 
+SELECT first_name, last_name, COUNT (*) as Total
+   ...> FROM actors
+   ...> GROUP BY LOWER(first_name), LOWER(last_name)
+   ...> ORDER BY total DESC
+   ...> LIMIT 10;
+
 5. __Prolific__
 
 Listá el top 100 de actores más activos junto con el número de roles que haya realizado.
+
+select a.first_name, a.last_name, count (*) as total
+from actors as a
+join roles as r
+on a.id = r.actor_id
+group by a.id
+order by total desc
+limit 100;
 
 6. __Bottom of the Barrel__
 
 Cuantas películas tiene IMDB por género? Ordená la lista por el género menos popular.
 
+select genre, count(*) as total
+from movies_genres
+group by genre
+order by total;
+
 7. __Braveheart__
 
 Listá el nombre y apellido de todos los actores que trabajaron en la película "Braveheart" de 1995, ordená la lista alfabéticamente por apellido.
+
+
 
 8. __Leap Noir__
 
