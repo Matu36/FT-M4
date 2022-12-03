@@ -1,3 +1,5 @@
++57 3175444298 john
+
 # Sequelize Homework
 
 Esta homework estará divida en 2 partes.
